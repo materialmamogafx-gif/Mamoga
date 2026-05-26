@@ -1,0 +1,2645 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mamoga Traders | Elite Forex Mentorship & Discipline</title>
+    <!-- Google Fonts: Inter for modern body, Space Grotesk for Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons for high-end iconography -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* --- PREMIUM CSS CORE & VARIABLES (BOLD TYPOGRAPHY PALETTE) --- */
+      :root {
+        --color-bg-darkest: #050505;
+        --color-bg-dark: #0a0a0a;
+        --color-bg-card: rgba(255, 255, 255, 0.03);
+        --color-bg-card-hover: rgba(255, 255, 255, 0.06);
+        --color-gold: #d4af37;
+        --color-gold-glow: rgba(212, 175, 55, 0.08);
+        --color-gold-light: #f3cd5d;
+        --color-blue: #111e35;
+        --color-blue-glow: rgba(37, 99, 235, 0.06);
+        --color-blue-light: #3b82f6;
+        --color-text-main: #E0E0E0;
+        --color-text-muted: rgba(255, 255, 255, 0.5);
+        --color-border: rgba(255, 255, 255, 0.1);
+        --color-border-active: #d4af37;
+        --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+        --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background-color: var(--color-bg-darkest);
+        color: var(--color-text-main);
+        font-family: var(--font-sans);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* --- BACKGROUND DECORATION --- */
+      #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.65;
+      }
+
+      .gradient-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(140px);
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.15;
+      }
+
+      .orb-gold {
+        top: 15%;
+        right: -10%;
+        width: 450px;
+        height: 450px;
+        background: radial-gradient(circle, var(--color-gold) 0%, transparent 75%);
+        animation: floatOrb 18s ease-in-out infinite alternate;
+      }
+
+      .orb-blue {
+        bottom: 10%;
+        left: -15%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, var(--color-blue) 0%, transparent 70%);
+        animation: floatOrb 24s ease-in-out infinite alternate-reverse;
+      }
+
+      @keyframes floatOrb {
+        0% { transform: translateY(0) scale(1); }
+        100% { transform: translateY(-50px) scale(1.15); }
+      }
+
+      /* --- CUSTOM SCROLLBAR --- */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-bg-darkest);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        border: 2px solid var(--color-bg-darkest);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-gold);
+      }
+
+      /* --- REVEAL ANIMATIONS ON SCROLL --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- STICKY NAV SYSTEM --- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(4, 5, 8, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--color-border);
+        transition: var(--transition-smooth);
+      }
+
+      header.scrolled {
+        padding: 8px 0;
+        background: rgba(4, 5, 8, 0.95);
+        border-bottom-color: rgba(212, 175, 55, 0.15);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand-title {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1.35rem;
+        letter-spacing: -1.5px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+        align-items: center;
+      }
+
+      .nav-link {
+        font-family: var(--font-display);
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 0.72rem; /* ~11px */
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2.2px;
+        transition: var(--transition-smooth);
+        position: relative;
+        padding: 6px 0;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background-color: var(--color-gold);
+        transition: var(--transition-smooth);
+      }
+
+      .nav-link:hover, .nav-link.active-section {
+        color: var(--color-gold);
+      }
+
+      .nav-link:hover::after, .nav-link.active-section::after {
+        width: 100%;
+      }
+
+      .cta-nav {
+        background: var(--color-gold) !important;
+        color: #050505 !important;
+        padding: 8px 16px !important;
+        border-radius: 2px !important;
+        font-size: 0.72rem !important;
+        font-weight: 950 !important;
+        text-transform: uppercase;
+        letter-spacing: 1.5px !important;
+        transition: var(--transition-smooth);
+        border: none !important;
+      }
+
+      .cta-nav:hover {
+        transform: translateY(-1.5px) !important;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35) !important;
+        background: var(--color-gold-light) !important;
+      }
+
+      /* MOBILE MENU TOGGLE */
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--color-text-main);
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+
+      @media (max-width: 900px) {
+        .menu-toggle {
+          display: block;
+        }
+        .nav-menu {
+          position: fixed;
+          top: 73px;
+          right: -100%;
+          width: 100%;
+          height: calc(100vh - 73px);
+          background: rgba(5, 5, 5, 0.98);
+          backdrop-filter: blur(20px);
+          flex-direction: column;
+          justify-content: center;
+          gap: 40px;
+          transition: 0.4s ease;
+          z-index: 999;
+          border-left: 1px solid var(--color-border);
+        }
+        .nav-menu.open {
+          right: 0;
+        }
+      }
+
+      /* --- HERO SECTION --- */
+      .hero {
+        position: relative;
+        padding: 160px 24px 100px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 48px;
+        align-items: center;
+        z-index: 2;
+      }
+
+      @media (max-width: 1024px) {
+        .hero {
+          grid-template-columns: 1fr;
+          text-align: center;
+          padding-top: 130px;
+          gap: 60px;
+        }
+      }
+
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 12px;
+        border-radius: 9999px !important;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        color: var(--color-gold);
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 24px;
+        animation: pulseBorder 3s infinite alternate;
+      }
+
+      @keyframes pulseBorder {
+        0% { border-color: rgba(212, 175, 55, 0.15); }
+        100% { border-color: rgba(212, 175, 55, 0.55); }
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: 4.8rem;
+        line-height: 0.92;
+        font-weight: 800;
+        letter-spacing: -3.5px;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+        color: #ffffff;
+      }
+
+      @media (max-width: 1200px) {
+        .hero-title {
+          font-size: 3.8rem;
+          letter-spacing: -2px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero-title {
+          font-size: 2.5rem;
+          letter-spacing: -1.5px;
+        }
+      }
+
+      .hero-title span {
+        background: linear-gradient(135deg, #ffffff 10%, var(--color-gold) 55%, #8a6d3b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-desc {
+        color: var(--color-text-muted);
+        font-size: 1.05rem;
+        font-weight: 400;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        max-width: 580px;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-desc {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .hero-ctas {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-ctas {
+          justify-content: center;
+        }
+      }
+
+      /* BUTTON STYLE PRESETS */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: 2px !important; /* rounded-sm equivalent */
+        font-size: 0.75rem; /* ~12px */
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        transition: var(--transition-smooth);
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #ffffff !important;
+        box-shadow: none !important;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        background: var(--color-gold) !important;
+        border-color: var(--color-gold) !important;
+        color: #000000 !important;
+      }
+
+      .btn-secondary {
+        background: transparent !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-color: rgba(255, 255, 255, 0.4) !important;
+        transform: translateY(-2px);
+      }
+
+      /* --- CHART DISPLAY WIDGET --- */
+      .chart-container-panel {
+        background: var(--color-bg-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 24px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .chart-container-panel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(212,175,55,0.25), transparent);
+      }
+
+      .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 14px;
+      }
+
+      .chart-info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .chart-pair-badge {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1.1rem;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 4px 10px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .chart-live-ticker {
+        font-family: var(--font-mono);
+        color: #10b981;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+      }
+
+      .chart-live-ticker.red-tick {
+        color: #ef4444;
+      }
+
+      .chart-tabs {
+        display: flex;
+        gap: 8px;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+      }
+
+      .chart-tab {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.05);
+        padding: 4px 8px;
+        border-radius: 4px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+      }
+
+      .chart-tab.active {
+        color: var(--color-gold);
+        border-color: rgba(212,175,55,0.3);
+        background: rgba(212,175,55,0.08);
+      }
+
+      .chart-draw-area {
+        position: relative;
+        width: 100%;
+        height: 250px;
+      }
+
+      .chart-metrics-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 16px;
+      }
+
+      .metric-badge {
+        color: var(--color-text-muted);
+      }
+
+      .metric-badge span {
+        display: block;
+        color: var(--color-text-main);
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-top: 2px;
+      }
+
+      .green-text { color: #10b981 !important; }
+      .gold-text { color: var(--color-gold) !important; }
+
+      /* --- STATS SECTION & CARDS --- */
+      .stats-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 2px !important; /* Extremely sharp corner radius */
+        padding: 30px;
+        text-align: center;
+        backdrop-filter: blur(12px);
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--color-gold);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .stat-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+
+      .stat-card:hover::after {
+        transform: scaleX(1);
+      }
+
+      .stat-num {
+        font-family: var(--font-display);
+        font-size: 3.4rem;
+        font-weight: 850;
+        letter-spacing: -2.5px;
+        background: linear-gradient(135deg, #ffffff 20%, var(--color-gold-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        color: rgba(255, 255, 255, 0.5);
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      /* --- ABOUT SECTION --- */
+      .about-section {
+        max-width: 1210px;
+        margin: 0 auto;
+        padding: 100px 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-tag {
+        font-family: var(--font-mono);
+        color: var(--color-gold);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2.2px;
+        margin-bottom: 12px;
+        display: inline-block;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: 3rem;
+        font-weight: 850;
+        letter-spacing: -2.5px;
+        text-transform: uppercase;
+        line-height: 0.95;
+        color: #ffffff;
+      }
+
+      @media (max-width: 640px) {
+        .section-title {
+          font-size: 2.2rem;
+          letter-spacing: -1.5px;
+        }
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      @media (max-width: 900px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      .about-content h3 {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        margin-bottom: 16px;
+        color: var(--color-gold-light);
+      }
+
+      .about-content p {
+        color: var(--color-text-muted);
+        font-size: 1.05rem;
+        margin-bottom: 24px;
+      }
+
+      .value-points {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 640px) {
+        .value-points {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .about-glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 2px !important; /* sharp styling */
+        padding: 30px;
+        backdrop-filter: blur(14px);
+        position: relative;
+      }
+
+      .about-glass-card::before {
+        content: '';
+        position: absolute;
+        width: 151px;
+        height: 151px;
+        background: var(--color-blue);
+        filter: blur(100px);
+        top: -30px;
+        left: -30px;
+        opacity: 0.12;
+        pointer-events: none;
+      }
+
+      .value-point-item {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .value-icon-container {
+        color: var(--color-gold);
+        background: rgba(212, 175, 55, 0.06);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        padding: 10px;
+        border-radius: 2px !important; /* sharp corners */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .value-point-text h4 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+        color: #ffffff;
+      }
+
+      .value-point-text p {
+        color: var(--color-text-muted);
+        font-size: 0.85rem;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      /* --- SERVICES / PRICING SECTION --- */
+      .services-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 32px;
+        align-items: stretch;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 480px) {
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .pricing-card {
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 2px !important; /* Sharp layouts */
+        padding: 40px;
+        backdrop-filter: blur(12px);
+        transition: var(--transition-smooth);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(212, 175, 55, 0.35) !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+      }
+
+      .pricing-card.premium-elite {
+        border-color: rgba(212, 175, 55, 0.3) !important;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%) !important;
+      }
+
+      .pricing-card.premium-elite::before {
+        content: 'ELITE PASS';
+        position: absolute;
+        top: 20px;
+        right: -32px;
+        background: var(--color-gold);
+        color: #050505;
+        font-family: var(--font-display);
+        font-size: 0.62rem;
+        font-weight: 900;
+        padding: 4px 30px;
+        transform: rotate(45deg);
+        letter-spacing: 1.5px;
+      }
+
+      .service-name {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 12px;
+      }
+
+      .service-price {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--color-gold-light);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+
+      .service-price span {
+        font-family: var(--font-sans);
+        color: var(--color-text-muted);
+        font-size: 0.95rem;
+        font-weight: 400;
+      }
+
+      .service-features {
+        list-style: none;
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .service-features li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.95rem;
+        color: var(--color-text-muted);
+      }
+
+      .service-features li i {
+        color: var(--color-gold);
+        flex-shrink: 0;
+      }
+
+      /* --- PERFORMANCE SECTION --- */
+      .performance-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .performance-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      @media (max-width: 900px) {
+        .performance-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      .performance-metrics-group {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .progress-container {
+        margin-bottom: 4px;
+      }
+
+      .progress-headers {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+      }
+
+      .progress-bar-bg {
+        width: 100%;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(90deg, var(--color-blue) 0%, var(--color-gold) 100%);
+        width: 0%;
+        transition: width 2s cubic-bezier(0.1, 1, 0.1, 1);
+      }
+
+      .performance-dashboard {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 2px !important;
+        padding: 30px;
+        position: relative;
+        backdrop-filter: blur(10px);
+      }
+
+      /* --- TESTIMONIALS SECTION --- */
+      .testimonials-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      }
+
+      .testimonial-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 2px !important;
+        padding: 30px;
+        transition: var(--transition-smooth);
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(212, 175, 55, 0.35);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .stars-row {
+        color: var(--color-gold);
+        display: flex;
+        gap: 4px;
+        margin-bottom: 16px;
+      }
+
+      .testimonial-quote {
+        color: var(--color-text-muted);
+        font-size: 0.92rem;
+        font-style: italic;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .testimonial-user {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .avatar-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-gold) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--color-text-main);
+        border: 1.5px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .user-identity h5 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #ffffff;
+      }
+
+      .user-identity span {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        display: block;
+      }
+
+      /* --- FREE COMMUNITY SECTION --- */
+      .community-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .community-glowing-card {
+        background: radial-gradient(circle at top right, rgba(29, 78, 216, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 2px !important;
+        padding: 60px 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+      }
+
+      @media (max-width: 640px) {
+        .community-glowing-card {
+          padding: 40px 20px;
+        }
+      }
+
+      .community-glow-orb {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        background: var(--color-gold);
+        filter: blur(100px);
+        opacity: 0.08;
+        pointer-events: none;
+      }
+
+      .community-content {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .community-title {
+        font-family: var(--font-display);
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+      }
+
+      @media (max-width: 640px) {
+        .community-title {
+          font-size: 2rem;
+        }
+      }
+
+      .community-desc {
+        color: var(--color-text-muted);
+        font-size: 1.1rem;
+        margin-bottom: 35px;
+      }
+
+      .btn-glowing-gold {
+        background: linear-gradient(135deg, #f3cd5d 0%, var(--color-gold) 100%);
+        color: #040508 !important;
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+        padding: 16px 40px;
+        font-size: 1.05rem;
+        border-radius: 10px;
+        border: none;
+      }
+
+      .btn-glowing-gold:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 45px rgba(212, 175, 55, 0.55);
+      }
+
+      /* --- CONTACT SECTION --- */
+      .contact-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 24px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .contact-options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 40px;
+      }
+
+      .contact-btn-card {
+        background: var(--color-bg-card);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 30px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--color-text-main);
+        transition: var(--transition-smooth);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        backdrop-filter: blur(8px);
+      }
+
+      .contact-btn-card:hover {
+        transform: translateY(-5px);
+        background: var(--color-bg-card-hover);
+        border-color: rgba(212, 175, 55, 0.3);
+      }
+
+      .contact-btn-card.whatsapp-direct {
+        border-color: rgba(34, 197, 94, 0.2);
+      }
+      .contact-btn-card.whatsapp-direct:hover {
+        border-color: rgba(34, 197, 94, 0.45);
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.1);
+      }
+
+      .contact-card-icon {
+        color: var(--color-gold);
+        background: rgba(212, 175, 55, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.15);
+        padding: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition-smooth);
+      }
+
+      .contact-btn-card:hover .contact-card-icon {
+        transform: scale(1.1);
+      }
+
+      .contact-btn-card.whatsapp-direct .contact-card-icon {
+        color: #22c55e;
+        background: rgba(34, 197, 94, 0.08);
+        border-color: rgba(34, 197, 94, 0.15);
+      }
+
+      .contact-card-label {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 600;
+      }
+
+      .contact-card-val {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+      }
+
+      /* --- FOOTER & REGULATORY DISCLAIMER --- */
+      footer {
+        background: #020305;
+        border-top: 1px solid var(--color-border);
+        padding: 80px 24px 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto 60px;
+        display: grid;
+        grid-template-columns: 1.5fr repeat(2, 0.75fr);
+        gap: 48px;
+      }
+
+      @media (max-width: 768px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      .footer-brand h4 {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .footer-brand h4 span {
+        background: linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .footer-brand p {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+        max-width: 320px;
+        margin-bottom: 24px;
+      }
+
+      .footer-links h5 {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--color-gold-light);
+      }
+
+      .footer-links ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .footer-links a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: var(--transition-smooth);
+      }
+
+      .footer-links a:hover {
+        color: var(--color-gold);
+        padding-left: 4px;
+      }
+
+      .social-row {
+        display: flex;
+        gap: 12px;
+      }
+
+      .social-circle {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--color-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-muted);
+        text-decoration: none;
+        transition: var(--transition-smooth);
+      }
+
+      .social-circle:hover {
+        background: rgba(212,175,55,0.1);
+        color: var(--color-gold-light);
+        border-color: rgba(212,175,55,0.3);
+        transform: translateY(-2px);
+      }
+
+      .disclaimer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255,255,255,0.04);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        text-align: center;
+      }
+
+      .disclaimer-title {
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--color-gold);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .disclaimer-text {
+        font-size: 0.8rem;
+        color: #6b7280;
+        line-height: 1.6;
+        max-width: 900px;
+      }
+
+      .copyright-text {
+        font-size: 0.8rem;
+        color: #4b5563;
+        margin-top: 12px;
+      }
+
+      /* --- FLOATERS: WHATSAPP BOT & SKAYMO AI --- */
+      .whatsapp-pulse-btn {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        background-color: #22c55e;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: var(--transition-smooth);
+      }
+
+      .whatsapp-pulse-btn::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #22c55e;
+        opacity: 0.4;
+        animation: pulseRadar 2s infinite;
+        z-index: -1;
+      }
+
+      @keyframes pulseRadar {
+        0% { transform: scale(1); opacity: 0.4; }
+        100% { transform: scale(1.6); opacity: 0; }
+      }
+
+      .whatsapp-pulse-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+      }
+
+      /* SKAYMO CHATBOT ELEMENT */
+      .skaymo-chat-widget {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1001;
+        font-family: var(--font-sans);
+      }
+
+      .skaymo-toggle-bubble {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--color-gold) 0%, #a47c1b 100%);
+        color: #040508;
+        box-shadow: 0 4px 25px rgba(212, 175, 55, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        border: 1px solid rgba(255,255,255,0.15);
+      }
+
+      .skaymo-toggle-bubble:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 8px 30px rgba(212, 175, 55, 0.45);
+      }
+
+      .skaymo-window {
+        position: absolute;
+        bottom: 75px;
+        right: 0;
+        width: 380px;
+        height: 520px;
+        background: #090e18;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+        border-radius: 16px;
+        overflow: hidden;
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      .skaymo-window.open {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      @media (max-width: 480px) {
+        .skaymo-window {
+          width: calc(100vw - 40px);
+          height: 480px;
+        }
+      }
+
+      .skaymo-header {
+        background: linear-gradient(135deg, rgba(13, 18, 30, 0.95) 0%, rgba(20, 27, 43, 0.95) 100%);
+        padding: 18px;
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .skaymo-brand-area {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .skaymo-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-blue) 100%);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.8rem;
+        color: #040508;
+      }
+
+      .skaymo-title-info h4 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--color-text-main);
+      }
+
+      .skaymo-title-info span {
+        font-size: 0.75rem;
+        color: #10b981;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .skaymo-close-btn {
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: var(--transition-smooth);
+      }
+
+      .skaymo-close-btn:hover {
+        color: var(--color-text-main);
+        background: rgba(255,255,255,0.05);
+      }
+
+      .skaymo-chat-area {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        background: rgba(4, 5, 8, 0.2);
+      }
+
+      .message-bubble {
+        max-width: 80%;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        word-wrap: break-word;
+      }
+
+      .message-bubble.assistant {
+        background: rgba(13, 18, 30, 0.8);
+        border: 1px solid rgba(255,255,255,0.04);
+        color: var(--color-text-main);
+        align-self: flex-start;
+        border-bottom-left-radius: 2px;
+      }
+
+      .message-bubble.user {
+        background: linear-gradient(135deg, var(--color-gold) 0%, #b8911f 100%);
+        color: #040508;
+        align-self: flex-end;
+        border-bottom-right-radius: 2px;
+        font-weight: 500;
+      }
+
+      .skaymo-typing-indicator {
+        align-self: flex-start;
+        background: rgba(13, 18, 30, 0.8);
+        border: 1px solid rgba(255,255,255,0.04);
+        padding: 12px 18px;
+        border-radius: 12px;
+        display: none;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .typing-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--color-gold);
+        border-radius: 50%;
+        animation: typingBlink 1.4s infinite both;
+      }
+
+      .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+      .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes typingBlink {
+        0% { opacity: 0.2; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(-4px); }
+        100% { opacity: 0.2; transform: translateY(0); }
+      }
+
+      .skaymo-prompts-row {
+        display: flex;
+        gap: 8px;
+        padding: 10px 18px;
+        overflow-x: auto;
+        border-top: 1px solid rgba(255,255,255,0.03);
+        background: rgba(9, 14, 24, 0.5);
+      }
+
+      .skaymo-suggestion {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.05);
+        color: var(--color-text-muted);
+        padding: 6px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+
+      .skaymo-suggestion:hover {
+        background: rgba(212,175,55,0.08);
+        border-color: rgba(212,175,55,0.2);
+        color: var(--color-gold-light);
+      }
+
+      .skaymo-input-area {
+        padding: 14px;
+        background: #090e18;
+        border-top: 1px solid var(--color-border);
+        display: flex;
+        gap: 10px;
+      }
+
+      .skaymo-input {
+        flex: 1;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 10px 14px;
+        color: var(--color-text-main);
+        font-size: 0.85rem;
+        outline: none;
+        transition: var(--transition-smooth);
+      }
+
+      .skaymo-input:focus {
+        border-color: rgba(212,175,55,0.3);
+        background: rgba(255,255,255,0.04);
+      }
+
+      .skaymo-send-btn {
+        background: linear-gradient(135deg, var(--color-gold) 0%, #a47c1b 100%);
+        color: #040508;
+        border: none;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+
+      .skaymo-send-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      }
+
+      /* SEPARATOR MODULES */
+      .glowing-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), rgba(37, 99, 235, 0.1), transparent);
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- CANVAS ENGINE particles & grid orbs -->
+    <canvas id="particle-canvas"></canvas>
+    <div class="gradient-orb orb-gold"></div>
+    <div class="gradient-orb orb-blue"></div>
+
+    <!-- STICKY NAVBAR -->
+    <header id="main-header">
+      <div class="nav-container">
+        <a href="#" class="brand-title">
+          <i data-lucide="trending-up" style="color: var(--color-gold);"></i>
+          <span>MAMOGA</span> TRADERS
+        </a>
+        
+        <button class="menu-toggle" id="menu-toggle-btn">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <ul class="nav-menu" id="nav-dropdown">
+          <li><a href="#" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About Us</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#performance" class="nav-link">Performance</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+          <li><a href="#community" class="nav-link">Community</a></li>
+          <li><a href="#contact" class="nav-link cta-nav">Contact Us</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- MAIN APP WRAPPER -->
+    <main style="position: relative; z-index: 2;">
+      
+      <!-- HERO SECTOR -->
+      <section class="hero reveal active">
+        <div>
+          <div class="hero-tag">
+            <i data-lucide="shield-check" style="width: 14px; height: 14px;"></i>
+            Rule-Based Market Speculation
+          </div>
+          <h1 class="hero-title">
+            Trade With Discipline.<br>
+            Build <span>Long-Term</span> Consistency.
+          </h1>
+          <p class="hero-desc">
+            Stop gambling on noise. Master institutional price action, rule-based entries, and strict capital allocation guides. Our metrics-driven system targets sustainable financial independence.
+          </p>
+          <div class="hero-ctas">
+            <a href="#services" class="btn btn-primary">
+              Start Mentorship
+              <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+            </a>
+            <a href="https://chat.whatsapp.com/BcU6iDHB2eD2ZiSTBkZfPS?mode=gi_t" target="_blank" class="btn btn-secondary">
+              <i data-lucide="users" style="color:var(--color-gold);width:16px;height:16px;"></i>
+              Join Free Group
+            </a>
+          </div>
+        </div>
+
+        <!-- HERO GRAPHIC PANEL: LIVE FLUID CHART -->
+        <div class="chart-container-panel">
+          <div class="chart-header">
+            <div class="chart-info-item">
+              <div class="chart-pair-badge">GBPUSD</div>
+              <div class="chart-live-ticker" id="candlestick-ticker">1.28421</div>
+            </div>
+            <div class="chart-tabs">
+              <div class="chart-tab active">M15</div>
+              <div class="chart-tab">H1</div>
+              <div class="chart-tab">D1</div>
+            </div>
+          </div>
+          
+          <!-- CANDLESTICK REAL CANVAS -->
+          <div class="chart-draw-area">
+            <canvas id="live-candle-canvas" style="width: 100%; height: 100%;"></canvas>
+          </div>
+
+          <div class="chart-metrics-row">
+            <div class="metric-badge">
+              TREND: <span class="green-text" id="trend-indicator"><i data-lucide="move-up-right" style="display:inline; width:12px; height:12px;"></i> BULLISH</span>
+            </div>
+            <div class="metric-badge">
+              R:R RATIO: <span class="gold-text">1:2 minimum</span>
+            </div>
+            <div class="metric-badge">
+              DAILY SPREAD: <span>0.8 pips avg</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="glowing-divider"></div>
+
+      <!-- REVEAL STATISTICS -->
+      <section class="stats-section reveal">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num" data-target="70">0%</div>
+            <div class="stat-label">Verified Historical Win Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-target="100">0%</div>
+            <div class="stat-label">Risk Managed System</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-target="100" data-suffix="/100">0</div>
+            <div class="stat-label">Beginner Friendly Mentorship</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" data-target="365" data-suffix=" days">0</div>
+            <div class="stat-label">Consistency-Focused Growth</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="glowing-divider" id="about"></div>
+
+      <!-- ABOUT US INSTRUCTIONAL CARD -->
+      <section class="about-section reveal">
+        <div class="about-grid">
+          <div class="about-glass-card">
+            <div class="section-tag">Premium Brand Values</div>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 24px;">Who is Mamoga Traders?</h2>
+            <p style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 20px;">
+              Our single directive is to eliminate high-leverage gambling from retail trading. Mamoga Traders is an educational brand that treats currency markets with industrial, statistical precision.
+            </p>
+            <p style="color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.7;">
+              We specialize in teaching advanced order blocks, price imbalances, and psychological discipline. Beginners understand the physical market mechanics before placing capital at risk.
+            </p>
+          </div>
+
+          <div class="value-points">
+            <div class="value-point-item">
+              <div class="value-icon-container">
+                <i data-lucide="target" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div class="value-point-text">
+                <h4>Discipline over Emotion</h4>
+                <p>Learn to follow exact technical playbooks rather than reactionary impulses.</p>
+              </div>
+            </div>
+
+            <div class="value-point-item">
+              <div class="value-icon-container">
+                <i data-lucide="percent" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div class="value-point-text">
+                <h4>Strict Capital Allocation</h4>
+                <p>Deploy maximum portfolio limits of 1-2% risk per individual sequence.</p>
+              </div>
+            </div>
+
+            <div class="value-point-item">
+              <div class="value-icon-container">
+                <i data-lucide="book-open" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div class="value-point-text">
+                <h4>A-Z Price Action Curriculum</h4>
+                <p>Complete training maps from basic liquidity concepts up to advanced setups.</p>
+              </div>
+            </div>
+
+            <div class="value-point-item">
+              <div class="value-icon-container">
+                <i data-lucide="headphones" style="width: 20px; height: 20px;"></i>
+              </div>
+              <div class="value-point-text">
+                <h4>Direct Professional Support</h4>
+                <p>Ongoing verification. Connect with elite mentors to audit historical trading accounts.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="glowing-divider" id="services"></div>
+
+      <!-- SERVICES & PRICING cards -->
+      <section class="services-section reveal">
+        <div class="section-header">
+          <span class="section-tag">Flexible Training Packages</span>
+          <h2 class="section-title">Institutional Mentorship Plans</h2>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- PLAN A -->
+          <div class="pricing-card premium-elite">
+            <div>
+              <div class="service-name">Beginner Mentorship</div>
+              <div class="service-price">R1500 <span>Once Off</span></div>
+              <ul class="service-features">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Complete forex foundational structure</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Systematized risk management rules</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Market psychology manuals</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Structural order-flow layouts</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Lifetime continuous guidance & Q&A</li>
+              </ul>
+            </div>
+            <a href="https://wa.me/27614871133?text=Hi%20Mamoga%20Traders,%20I%20am%20interested%20in%20your%20Beginner%20Mentorship%20package" target="_blank" class="btn btn-primary" style="width:100%;">
+              <i data-lucide="message-square-more" style="width:18px;height:18px;"></i>
+              Message on WhatsApp
+            </a>
+          </div>
+
+          <!-- PLAN B -->
+          <div class="pricing-card">
+            <div>
+              <div class="service-name">Strategy Package</div>
+              <div class="service-price">R700 <span>System Only</span></div>
+              <ul class="service-features">
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Designed for intermediate traders</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Full custom trading strategy blueprint</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Strict multi-confirmation setups</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> High probability entry/exit models</li>
+                <li><i data-lucide="check" style="width:16px;height:16px;"></i> Trading model spreadsheets & guides</li>
+              </ul>
+            </div>
+            <a href="https://wa.me/27614871133?text=Hi%20Mamoga%20Traders,%20I%20am%20interested%20in%20your%20Strategy%20Package" target="_blank" class="btn btn-secondary" style="width:100%;">
+              <i data-lucide="message-square-more" style="color:var(--color-gold);width:18px;height:18px;"></i>
+              Message on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="glowing-divider" id="performance"></div>
+
+      <!-- PERFORMANCE PORTFOLIO SECTION -->
+      <section class="performance-section reveal">
+        <div class="section-header">
+          <span class="section-tag">Disciplined Account Growth</span>
+          <h2 class="section-title">Performance & Consistency Statistics</h2>
+        </div>
+
+        <div class="performance-grid">
+          <div class="performance-metrics-group">
+            <p style="color:var(--color-text-muted); font-size:1.05rem; line-height:1.7;">
+              Consistent performance in currency markets demands an active commitment. Our metrics-driven system enforces risk minimization to defend capital across any market liquidity environment.
+            </p>
+            
+            <div class="progress-container">
+              <div class="progress-headers">
+                <span>Account Win Retention</span>
+                <span>70%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-progress="70"></div>
+              </div>
+            </div>
+
+            <div class="progress-container">
+              <div class="progress-headers">
+                <span>Risk-Reward Metric (Average)</span>
+                <span>1:2+</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-progress="85"></div>
+              </div>
+            </div>
+
+            <div class="progress-container">
+              <div class="progress-headers">
+                <span>Maximum Imposed Drawdown (per trade)</span>
+                <span>&lt; 1.5%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-progress="95"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PERFORMANCE DASHBOARD MODEL -->
+          <div class="performance-dashboard">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:12px;">
+              <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--color-gold);">ACCOUNT COMPLICITY DEPLOYMENT</span>
+              <span style="display:inline-flex; align-items:center; gap:6px; color:#10b981; font-size:0.75rem; font-family:var(--font-mono);">
+                <span style="width:8px; height:8px; background:#10b981; border-radius:50%; display:inline-block;"></span> PASSING TARGET
+              </span>
+            </div>
+            
+            <p style="font-family:var(--font-display); font-size:1.4rem; font-weight:700; margin-bottom:6px;">Trading success is earned over years, not days.</p>
+            <p style="color:var(--color-text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:20px;">
+              We avoid fake guarantees of rapid financial transformation. Instead, we teach intermediate mathematical compounding and strict mechanical entry principles.
+            </p>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-family:var(--font-mono); font-size:0.8rem;">
+              <div style="background:rgba(255,255,255,0.02); padding:12px; border:1px solid rgba(255,255,255,0.04); border-radius:6px;">
+                WIN PREFERENCE
+                <span style="display:block; color:#10b981; font-size:1.1rem; font-weight:600; margin-top:4px;">Strict R:R Limits</span>
+              </div>
+              <div style="background:rgba(255,255,255,0.02); padding:12px; border:1px solid rgba(255,255,255,0.04); border-radius:6px;">
+                CAPITAL TARGETS
+                <span style="display:block; color:var(--color-gold); font-size:1.1rem; font-weight:600; margin-top:4px;">Risk Defusal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="glowing-divider" id="testimonials"></div>
+
+      <!-- TESTIMONIALS SECTION -->
+      <section class="testimonials-section reveal">
+        <div class="section-header">
+          <span class="section-tag">Word from Our Traders</span>
+          <h2 class="section-title">Authentic Student Feedback</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- TESTIMONIAL 1 -->
+          <div class="testimonial-card">
+            <div>
+              <div class="stars-row">
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+              </div>
+              <p class="testimonial-quote">
+                "I was blown up on three consecutive deposits using highly leveraged signals before joining. Mamoga taught me how to actually manage structural stop losses and remain patient. The mentorship changed how I look at market sequences."
+              </p>
+            </div>
+            <div class="testimonial-user">
+              <div class="avatar-badge">LK</div>
+              <div class="user-identity">
+                <h5>Lebogang K.</h5>
+                <span>Student since 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TESTIMONIAL 2 -->
+          <div class="testimonial-card">
+            <div>
+              <div class="stars-row">
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+              </div>
+              <p class="testimonial-quote">
+                "Finding simple foundational instructions was impossible until trying the Beginner Mentorship. They explained advanced price imbalances clearly and layout the psychology required to manage a flat day without force-entering setups."
+              </p>
+            </div>
+            <div class="testimonial-user">
+              <div class="avatar-badge">MN</div>
+              <div class="user-identity">
+                <h5>Michael N.</h5>
+                <span>Joined Strategy Course</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TESTIMONIAL 3 -->
+          <div class="testimonial-card">
+            <div>
+              <div class="stars-row">
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+                <i data-lucide="star" style="fill: var(--color-gold); width:16px; height:16px;"></i>
+              </div>
+              <p class="testimonial-quote">
+                "The strategy blueprint is exceptionally precise. Instead of vague ideas, I got concrete confirmation criteria. By tracking my metrics, I managed to secure my first withdrawal of funds within two quarters."
+              </p>
+            </div>
+            <div class="testimonial-user">
+              <div class="avatar-badge">TS</div>
+              <div class="user-identity">
+                <h5>Thabo S.</h5>
+                <span>Consistency Focused</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="glowing-divider" id="community"></div>
+
+      <!-- FREE COMMUNITY OUTREACH -->
+      <section class="community-section reveal">
+        <div class="community-glowing-card">
+          <div class="community-glow-orb"></div>
+          <div class="community-content">
+            <span class="section-tag" style="color: var(--color-gold);">Collaborative Atmosphere</span>
+            <h2 class="community-title">Join Our Free Forex Community</h2>
+            <p class="community-desc">
+              Get access to active community discussions, fundamental market insights, psychological check-ins, and direct support for beginner traders. Completely free to join.
+            </p>
+            <a href="https://chat.whatsapp.com/BcU6iDHB2eD2ZiSTBkZfPS?mode=gi_t" target="_blank" class="btn btn-glowing-gold">
+              <i data-lucide="message-square" style="width:20px;height:20px;margin-right:8px;"></i>
+              Join Free Community Group
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="glowing-divider" id="contact"></div>
+
+      <!-- CONTACT BUTTONS -->
+      <section class="contact-section reveal">
+        <div class="section-header">
+          <span class="section-tag">Initiate Communications</span>
+          <h2 class="section-title">Connect with Mamoga Support</h2>
+        </div>
+
+        <div class="contact-options-grid">
+          <!-- WHATSAPP CONTACT -->
+          <a href="https://wa.me/27614871133?text=Hi%20Mamoga%20Traders,%20I%20am%20interested%20in%20your%20forex%20mentorship" target="_blank" class="contact-btn-card whatsapp-direct">
+            <div class="contact-card-icon">
+              <i data-lucide="message-circle" style="width:32px;height:32px;"></i>
+            </div>
+            <span class="contact-card-label">Direct WhatsApp Chat</span>
+            <span class="contact-card-val">+27 61 487 1133</span>
+          </a>
+
+          <!-- PHONE CONTACT -->
+          <a href="tel:+27614871133" class="contact-btn-card">
+            <div class="contact-card-icon">
+              <i data-lucide="phone-call" style="width:32px;height:32px;"></i>
+            </div>
+            <span class="contact-card-label">Call Office Directly</span>
+            <span class="contact-card-val">+27 61 487 1133</span>
+          </a>
+
+          <!-- EMAIL CONTACT -->
+          <a href="mailto:materialmamogafx@gmail.com" class="contact-btn-card">
+            <div class="contact-card-icon">
+              <i data-lucide="mail" style="width:32px;height:32px;"></i>
+            </div>
+            <span class="contact-card-label">Official Email Support</span>
+            <span class="contact-card-val">materialmamogafx@gmail.com</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FLOATING CHATBOT WIDGET: SKAYMO -->
+    <div class="skaymo-chat-widget">
+      <!-- TRIGGER PANEL BUBBLE -->
+      <div class="skaymo-toggle-bubble" id="skaymo-bubble">
+        <i data-lucide="message-square" id="skaymo-icon-message"></i>
+        <i data-lucide="x" id="skaymo-icon-close" style="display: none;"></i>
+      </div>
+
+      <!-- CHAT INTERFACE AREA -->
+      <div class="skaymo-window" id="skaymo-window">
+        <!-- HEADER -->
+        <div class="skaymo-header">
+          <div class="skaymo-brand-area">
+            <div class="skaymo-avatar">SM</div>
+            <div class="skaymo-title-info">
+              <h4>Skaymo AI</h4>
+              <span><span style="width:6px; height:6px; background:#10b981; border-radius:50%; display:inline-block;"></span> Active Trading Guide</span>
+            </div>
+          </div>
+          <button class="skaymo-close-btn" id="skaymo-close-panel">
+            <i data-lucide="minus"></i>
+          </button>
+        </div>
+
+        <!-- MESSAGES FEED -->
+        <div class="skaymo-chat-area" id="skaymo-feed">
+          <div class="message-bubble assistant">
+            Hello! I am <strong>Skaymo</strong>, your elite trading advisor representing Mamoga Traders. Ask me anything about risk management parameters, price imbalances, or our mentorship packages!
+          </div>
+        </div>
+
+        <!-- LOADING INDICATOR -->
+        <div class="skaymo-typing-indicator" id="skaymo-typing">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+
+        <!-- PROMPTS ROW -->
+        <div class="skaymo-prompts-row">
+          <div class="skaymo-suggestion" onclick="sendSuggestion('Tell me about the R1500 Mentorship.')">Mentorship info</div>
+          <div class="skaymo-suggestion" onclick="sendSuggestion('What is proper risk management?')">Risk Management</div>
+          <div class="skaymo-suggestion" onclick="sendSuggestion('How can I join the WhatsApp Group?')">Join WhatsApp</div>
+        </div>
+
+        <!-- INPUT BAR -->
+        <div class="skaymo-input-area">
+          <input type="text" class="skaymo-input" id="skaymo-user-input" placeholder="Ask about forex models, mentorship..." autocomplete="off">
+          <button class="skaymo-send-btn" id="skaymo-send-trigger">
+            <i data-lucide="send" style="width:16px;height:16px;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <a href="https://wa.me/27614871133?text=Hi%20Mamoga%20Traders,%20I%20am%20interested%20in%20your%20forex%20mentorship" target="_blank" class="whatsapp-pulse-btn">
+      <i data-lucide="message-circle" style="width:28px; height:28px; fill: white;"></i>
+    </a>
+
+    <!-- REGULATORY FOOTER AND SOCIALS -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4><span>MAMOGA</span> TRADERS</h4>
+          <p>Treat forex speculation as an exact business. Master technical layouts, structural rules, and behavioral psychology under targeted mentors.</p>
+          <div class="social-row">
+            <a href="https://www.youtube.com/@MamogaTraders" target="_blank" class="social-circle">
+              <i data-lucide="youtube" style="width:18px;height:18px;"></i>
+            </a>
+            <a href="https://chat.whatsapp.com/BcU6iDHB2eD2ZiSTBkZfPS?mode=gi_t" target="_blank" class="social-circle">
+              <i data-lucide="message-square" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <h5>Navigate</h5>
+          <ul>
+            <li><a href="#">Back to Top</a></li>
+            <li><a href="#about">About Premium Values</a></li>
+            <li><a href="#services">Mentorship Options</a></li>
+            <li><a href="#performance">Verified Metrics</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h5>Legal Links</h5>
+          <ul>
+            <li><a href="#contact">Contact Support</a></li>
+            <li><a href="mailto:materialmamogafx@gmail.com">Privacy Statement</a></li>
+            <li><a href="https://wa.me/27614871133" target="_blank">WhatsApp Direct</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="disclaimer-container">
+        <div class="disclaimer-title">CFTC & Financial Authority Risk Warnings</div>
+        <p class="disclaimer-text">
+          Forex trading involves substantial risk and is not suitable for every investor. Past performance is not a guarantee of future results. Trade responsibly and only risk capital you can afford to lose. Mamoga Traders provides structured education, mentorship models, and analytical frameworks. We do not act as licensed investment advisors, offer capital-allocational advice, or operate managed financial accounts.
+        </p>
+        <div class="copyright-text">
+          © 2026 Mamoga Traders. Designed with Industrial Finance Style. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- --- JAVASCRIPT LOGIC --- -->
+    <script>
+      // Initialize lucide icons on load
+      lucide.createIcons();
+
+      // --- MOBILE RESPONSIVE NAV HAMBURGER ---
+      const menuToggleLink = document.getElementById('menu-toggle-btn');
+      const navDropdownList = document.getElementById('nav-dropdown');
+
+      menuToggleLink.addEventListener('click', () => {
+        navDropdownList.classList.toggle('open');
+      });
+
+      // Close dropdown if a link is clicked
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navDropdownList.classList.remove('open');
+        });
+      });
+
+      // --- STICKY NAV BACKGROUND SHIFT ---
+      const mainHeaderTag = document.getElementById('main-header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          mainHeaderTag.classList.add('scrolled');
+        } else {
+          mainHeaderTag.classList.remove('scrolled');
+        }
+      });
+
+      // --- ACTIVE LINK TRANSITIONS ---
+      const appSectionsList = document.querySelectorAll('section[id], div[id]');
+      const navElementsList = document.querySelectorAll('.nav-link');
+
+      window.addEventListener('scroll', () => {
+        let currentSectionId = '';
+        appSectionsList.forEach(section => {
+          const sectionTopPos = section.offsetTop;
+          const sectionHeightVal = section.clientHeight;
+          if (window.scrollY >= (sectionTopPos - 120)) {
+            currentSectionId = section.getAttribute('id');
+          }
+        });
+
+        navElementsList.forEach(link => {
+          link.classList.remove('active-section');
+          if (currentSectionId && link.getAttribute('href') === `#${currentSectionId}`) {
+            link.classList.add('active-section');
+          }
+        });
+      });
+
+      // --- REVEAL ELEMENTS ON SCROLL ---
+      const itemsToReveal = document.querySelectorAll('.reveal');
+      const revealOnScrollFn = () => {
+        const thresholdLine = window.innerHeight * 0.85;
+        itemsToReveal.forEach(element => {
+          const elementTopPos = element.getBoundingClientRect().top;
+          if (elementTopPos < thresholdLine) {
+            element.classList.add('active');
+            
+            // Initiate progress bar loading triggers
+            const bars = element.querySelectorAll('.progress-bar-fill');
+            bars.forEach(bar => {
+              const cap = bar.getAttribute('data-progress');
+              bar.style.width = cap + '%';
+            });
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', revealOnScrollFn);
+      // Run once on start for top screen objects
+      revealOnScrollFn();
+
+      // --- ANIMATING STATS COUNTER ---
+      let startNumberCountState = false;
+      const animateCountElements = () => {
+        const statsSectionBounding = document.querySelector('.stats-section');
+        if (!statsSectionBounding || startNumberCountState) return;
+
+        const bounds = statsSectionBounding.getBoundingClientRect();
+        if (bounds.top < window.innerHeight) {
+          startNumberCountState = true;
+          document.querySelectorAll('.stat-num').forEach(element => {
+            const targetVal = parseFloat(element.getAttribute('data-target'));
+            const suffixStr = element.getAttribute('data-suffix') || '%';
+            let startVal = 0;
+            const stepMultiplier = targetVal / 50;
+            
+            const countInterval = setInterval(() => {
+              startVal += stepMultiplier;
+              if (startVal >= targetVal) {
+                element.textContent = targetVal + suffixStr;
+                clearInterval(countInterval);
+              } else {
+                element.textContent = Math.floor(startVal) + suffixStr;
+              }
+            }, 25);
+          });
+        }
+      };
+      window.addEventListener('scroll', animateCountElements);
+      animateCountElements();
+
+      // --- BACKGROUND PARTICLE CANVAS ENGINE ---
+      const activeBackgroundCanvas = document.getElementById('particle-canvas');
+      const canvasContext = activeBackgroundCanvas.getContext('2d');
+
+      let particleArray = [];
+      const particleMetricsDensity = 55;
+
+      const resizeWebCanvas = () => {
+        activeBackgroundCanvas.width = window.innerWidth;
+        activeBackgroundCanvas.height = window.innerHeight;
+      };
+      window.addEventListener('resize', resizeWebCanvas);
+      resizeWebCanvas();
+
+      class ParticleSystemDot {
+        constructor() {
+          this.x = Math.random() * activeBackgroundCanvas.width;
+          this.y = Math.random() * activeBackgroundCanvas.height;
+          this.size = Math.random() * 2.5 + 0.5;
+          this.velX = (Math.random() - 0.5) * 0.45;
+          this.velY = (Math.random() - 0.5) * 0.45;
+          this.opacity = Math.random() * 0.65 + 0.15;
+        }
+
+        updateCoordinates() {
+          this.x += this.velX;
+          this.y += this.velY;
+
+          // Bounce off boundaries
+          if (this.x < 0 || this.x > activeBackgroundCanvas.width) this.velX *= -1;
+          if (this.y < 0 || this.y > activeBackgroundCanvas.height) this.velY *= -1;
+        }
+
+        renderGraphics() {
+          canvasContext.beginPath();
+          canvasContext.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          // Alternates dots between blue tint and luxury gold tint
+          if (this.opacity > 0.5) {
+            canvasContext.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+          } else {
+            canvasContext.fillStyle = `rgba(37, 99, 235, ${this.opacity})`;
+          }
+          canvasContext.fill();
+        }
+      }
+
+      const initializeParticlesPool = () => {
+        particleArray = [];
+        for (let i = 0; i < particleMetricsDensity; i++) {
+          particleArray.push(new ParticleSystemDot());
+        }
+      };
+      initializeParticlesPool();
+
+      const runConstellationDrawLoop = () => {
+        canvasContext.clearRect(0, 0, activeBackgroundCanvas.width, activeBackgroundCanvas.height);
+        
+        // Render subtle lines
+        for (let a = 0; a < particleArray.length; a++) {
+          particleArray[a].updateCoordinates();
+          particleArray[a].renderGraphics();
+
+          for (let b = a; b < particleArray.length; b++) {
+            const dx = particleArray[a].x - particleArray[b].x;
+            const dy = particleArray[a].y - particleArray[b].y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+
+            if (dist < 140) {
+              const alphaValue = (1 - (dist / 140)) * 0.11;
+              canvasContext.strokeStyle = `rgba(212, 175, 55, ${alphaValue})`;
+              canvasContext.lineWidth = 0.5;
+              canvasContext.beginPath();
+              canvasContext.moveTo(particleArray[a].x, particleArray[a].y);
+              canvasContext.lineTo(particleArray[b].x, particleArray[b].y);
+              canvasContext.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(runConstellationDrawLoop);
+      };
+      runConstellationDrawLoop();
+
+
+      // --- LIVE HIGH-END INTERACTIVE FOREX CHART ---
+      const candleCanvas = document.getElementById('live-candle-canvas');
+      const candleCtx = candleCanvas.getContext('2d');
+
+      let candlesPool = [];
+      const totalDisplayCandlesCount = 20;
+      let tickCurrentPrice = 1.28421;
+      let targetTickerElement = document.getElementById('candlestick-ticker');
+      let trendIndicatorBadge = document.getElementById('trend-indicator');
+
+      const setupCandleResolution = () => {
+        const width = candleCanvas.parentElement.clientWidth;
+        const height = candleCanvas.parentElement.clientHeight || 250;
+        candleCanvas.width = width;
+        candleCanvas.height = height;
+      };
+      
+      const initializeMockHistoricalData = () => {
+        let basePrice = 1.28250;
+        let trendBias = 1;
+        
+        for (let i = 0; i < totalDisplayCandlesCount; i++) {
+          // generate random bullish bias candles with volatility
+          const spreadFactor = Math.random() * 0.00035;
+          const isBull = Math.random() > 0.38; // 62% chance bullish setup
+          
+          let open = basePrice;
+          let close = isBull ? basePrice + spreadFactor : basePrice - spreadFactor;
+          let high = Math.max(open, close) + (Math.random() * 0.00015);
+          let low = Math.min(open, close) - (Math.random() * 0.00015);
+
+          candlesPool.push({ open, high, low, close });
+          basePrice = close;
+        }
+        tickCurrentPrice = basePrice;
+      };
+
+      const animateRealtimePriceTick = () => {
+        setInterval(() => {
+          // Dynamic pricing tick
+          const priceChangeAction = (Math.random() - 0.49) * 0.00008; // small upward bias
+          const previousPrice = tickCurrentPrice;
+          tickCurrentPrice += priceChangeAction;
+          
+          // Render changes on text badge and flash colors
+          targetTickerElement.textContent = tickCurrentPrice.toFixed(5);
+          if (tickCurrentPrice > previousPrice) {
+            targetTickerElement.classList.remove('red-tick');
+            targetTickerElement.style.color = '#10b981';
+          } else {
+            targetTickerElement.classList.add('red-tick');
+            targetTickerElement.style.color = '#ef4444';
+          }
+
+          // Update the final active candle's close value
+          if (candlesPool.length > 0) {
+            const index = candlesPool.length - 1;
+            candlesPool[index].close = tickCurrentPrice;
+            if (tickCurrentPrice > candlesPool[index].high) candlesPool[index].high = tickCurrentPrice;
+            if (tickCurrentPrice < candlesPool[index].low) candlesPool[index].low = tickCurrentPrice;
+          }
+
+          renderCandlesticksGraphics();
+        }, 800);
+      };
+
+      const renderCandlesticksGraphics = () => {
+        if (!candleCtx) return;
+        candleCtx.clearRect(0, 0, candleCanvas.width, candleCanvas.height);
+
+        const padLeftRight = 20;
+        const chartRenderHeight = candleCanvas.height - 40;
+        const chartRenderWidth = candleCanvas.width - (padLeftRight * 2);
+        const candleDrawWidth = (chartRenderWidth / totalDisplayCandlesCount) * 0.7;
+        const spacingWidth = (chartRenderWidth / totalDisplayCandlesCount) * 0.3;
+
+        // Locate high-low of full candle pool
+        let absoluteMaxHigh = -Infinity;
+        let absoluteMinLow = Infinity;
+        candlesPool.forEach(candle => {
+          if (candle.high > absoluteMaxHigh) absoluteMaxHigh = candle.high;
+          if (candle.low < absoluteMinLow) absoluteMinLow = candle.low;
+        });
+
+        // Add padding buffers
+        absoluteMaxHigh += 0.00015;
+        absoluteMinLow -= 0.00015;
+        const priceAxisBoundsRange = absoluteMaxHigh - absoluteMinLow;
+
+        // Draw Imposed Horizontal grid lines
+        candleCtx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+        candleCtx.lineWidth = 1;
+        for (let r = 0; r < 5; r++) {
+          const gridYPos = 20 + (chartRenderHeight / 4) * r;
+          candleCtx.beginPath();
+          candleCtx.moveTo(0, gridYPos);
+          candleCtx.lineTo(candleCanvas.width, gridYPos);
+          candleCtx.stroke();
+
+          // Print pricing indicator lines values
+          const labelPrice = absoluteMaxHigh - (priceAxisBoundsRange / 4) * r;
+          candleCtx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+          candleCtx.font = '9px monospace';
+          candleCtx.fillText(labelPrice.toFixed(5), candleCanvas.width - 55, gridYPos - 4);
+        }
+
+        // Draw Candlesticks & lines
+        candlesPool.forEach((candle, idx) => {
+          const barXPos = padLeftRight + idx * (candleDrawWidth + spacingWidth);
+          
+          // Map prices to coordinate structures
+          const openY = 20 + chartRenderHeight - ((candle.open - absoluteMinLow) / priceAxisBoundsRange) * chartRenderHeight;
+          const closeY = 20 + chartRenderHeight - ((candle.close - absoluteMinLow) / priceAxisBoundsRange) * chartRenderHeight;
+          const highY = 20 + chartRenderHeight - ((candle.high - absoluteMinLow) / priceAxisBoundsRange) * chartRenderHeight;
+          const lowY = 20 + chartRenderHeight - ((candle.low - absoluteMinLow) / priceAxisBoundsRange) * chartRenderHeight;
+
+          const isBullCandle = candle.close >= candle.open;
+          const candColor = isBullCandle ? '#10b981' : '#ef4444';
+
+          // Render wick line
+          candleCtx.strokeStyle = candColor;
+          candleCtx.lineWidth = 1.5;
+          candleCtx.beginPath();
+          candleCtx.moveTo(barXPos + (candleDrawWidth / 2), highY);
+          candleCtx.lineTo(barXPos + (candleDrawWidth / 2), lowY);
+          candleCtx.stroke();
+
+          // Render body rectangle
+          candleCtx.fillStyle = candColor;
+          const bodyHeightValue = Math.max(Math.abs(closeY - openY), 1.5);
+          const drawYAxisStartPoint = Math.min(openY, closeY);
+          
+          candleCtx.beginPath();
+          candleCtx.roundRect(barXPos, drawYAxisStartPoint, candleDrawWidth, bodyHeightValue, 2);
+          candleCtx.fill();
+        });
+
+        // Draw elegant indicator Moving Average Line (curvy gold)
+        candleCtx.strokeStyle = '#d4af37';
+        candleCtx.lineWidth = 1.5;
+        candleCtx.beginPath();
+        candlesPool.forEach((candle, idx) => {
+          const barXPos = padLeftRight + idx * (candleDrawWidth + spacingWidth) + (candleDrawWidth / 2);
+          // Simple local calculation for dummy SMA-5
+          let compoundSum = 0;
+          let divideFactor = 0;
+          for (let m = Math.max(0, idx - 4); m <= idx; m++) {
+            compoundSum += candlesPool[m].close;
+            divideFactor++;
+          }
+          const smaPrice = compoundSum / divideFactor;
+          const smaY = 20 + chartRenderHeight - ((smaPrice - absoluteMinLow) / priceAxisBoundsRange) * chartRenderHeight;
+
+          if (idx === 0) {
+            candleCtx.moveTo(barXPos, smaY);
+          } else {
+            candleCtx.lineTo(barXPos, smaY);
+          }
+        });
+        candleCtx.stroke();
+      };
+
+      // Boot up the dynamic visual components
+      setupCandleResolution();
+      initializeMockHistoricalData();
+      renderCandlesticksGraphics();
+      animateRealtimePriceTick();
+
+      // Recalibrate chart canvas layout scale bounds on window resize
+      window.addEventListener('resize', () => {
+        setupCandleResolution();
+        renderCandlesticksGraphics();
+      });
+
+
+      // --- FLOATING CHATBOT ENGINE: SKAYMO ---
+      const skaymoBubbleLink = document.getElementById('skaymo-bubble');
+      const skaymoIconMsg = document.getElementById('skaymo-icon-message');
+      const skaymoIconClose = document.getElementById('skaymo-icon-close');
+      const skaymoWindowDiv = document.getElementById('skaymo-window');
+      const skaymoClosePanelBtn = document.getElementById('skaymo-close-panel');
+      const skaymoFeedContainer = document.getElementById('skaymo-feed');
+      const skaymoUserInputBox = document.getElementById('skaymo-user-input');
+      const skaymoSendTriggerBtn = document.getElementById('skaymo-send-trigger');
+      const skaymoTypingEl = document.getElementById('skaymo-typing');
+
+      // Thread of conversational items
+      const conversationThread = [
+        { role: "assistant", content: "Hello! I am Skaymo, your elite trading advisor representing Mamoga Traders. Ask me anything about risk management, price imbalances, or our mentorship packages!" }
+      ];
+
+      // Toggle conversation interface panel
+      skaymoBubbleLink.addEventListener('click', () => {
+        const isCurrentlyOpen = skaymoWindowDiv.classList.contains('open');
+        if (isCurrentlyOpen) {
+          closeSkaymoChatPanel();
+        } else {
+          openSkaymoChatPanel();
+        }
+      });
+
+      skaymoClosePanelBtn.addEventListener('click', closeSkaymoChatPanel);
+
+      function openSkaymoChatPanel() {
+        skaymoWindowDiv.style.display = 'flex';
+        // force element style render wait before setting opacity
+        setTimeout(() => {
+          skaymoWindowDiv.classList.add('open');
+          skaymoIconMsg.style.display = 'none';
+          skaymoIconClose.style.display = 'block';
+        }, 10);
+      }
+
+      function closeSkaymoChatPanel() {
+        skaymoWindowDiv.classList.remove('open');
+        skaymoIconMsg.style.display = 'block';
+        skaymoIconClose.style.display = 'none';
+        setTimeout(() => {
+          skaymoWindowDiv.style.display = 'none';
+        }, 300);
+      }
+
+      // Handle custom suggest badges clicks directly
+      function sendSuggestion(textPrompt) {
+        skaymoUserInputBox.value = textPrompt;
+        triggerUserMessageDispatch();
+      }
+
+      skaymoSendTriggerBtn.addEventListener('click', triggerUserMessageDispatch);
+      skaymoUserInputBox.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') triggerUserMessageDispatch();
+      });
+
+      async function triggerUserMessageDispatch() {
+        const textValue = skaymoUserInputBox.value.trim();
+        if (!textValue) return;
+
+        // Append to the visual chat feed and input box reset
+        appendChatBubble("user", textValue);
+        skaymoUserInputBox.value = '';
+
+        conversationThread.push({ role: "user", content: textValue });
+
+        // Show typing indicator
+        skaymoTypingEl.style.display = 'flex';
+        skaymoFeedContainer.scrollTop = skaymoFeedContainer.scrollHeight;
+
+        try {
+          const serverResponse = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ messages: conversationThread })
+          });
+
+          if (!serverResponse.ok) {
+            throw new Error("Unable to reach Skaymo's live server.");
+          }
+
+          const parsedData = await serverResponse.json();
+          const aiResponseReply = parsedData.reply || "I encountered an error looking up analysis. Please try again.";
+
+          // Append response and store in memory thread
+          appendChatBubble("assistant", aiResponseReply);
+          conversationThread.push({ role: "assistant", content: aiResponseReply });
+
+        } catch (error) {
+          console.warn("Server chat fetch failed. Falling back to local educational response rules... Error:", error);
+          
+          // GRACEFUL LOCAL OFFLINE INTELLIGENCE BACKUP (For local index.html downloads!)
+          const offlineReplyText = getOfflineCalculatedReply(textValue);
+          
+          appendChatBubble("assistant", offlineReplyText);
+          conversationThread.push({ role: "assistant", content: offlineReplyText });
+        } finally {
+          skaymoTypingEl.style.display = 'none';
+          skaymoFeedContainer.scrollTop = skaymoFeedContainer.scrollHeight;
+        }
+      }
+
+      function appendChatBubble(role, contentText) {
+        const bubble = document.createElement('div');
+        bubble.className = `message-bubble ${role}`;
+        
+        // Simple markdown links or line break matching
+        let cleanText = contentText
+          .replace(/\n/g, '<br>')
+          .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color:var(--color-gold-light); text-decoration:underline;">$1</a>');
+
+        bubble.innerHTML = cleanText;
+        skaymoFeedContainer.appendChild(bubble);
+        skaymoFeedContainer.scrollTop = skaymoFeedContainer.scrollHeight;
+      }
+
+      // OFFLINE HEURISTICS MODULE FOR MAX VALUE (LOCAL COMPATIBILITY MANDATES)
+      function getOfflineCalculatedReply(query) {
+        const qUpper = query.toUpperCase();
+
+        // 1. Mentorship Qs
+        if (qUpper.includes("MENTOR") || qUpper.includes("PLAN") || qUpper.includes("PRICE") || qUpper.includes("R1500") || qUpper.includes("R700")) {
+          return "Indeed! Mamoga Traders offers two professional plans:<br><br><strong>1. Beginner Mentorship (R1500 Once-Off)</strong>: foundational basics, intensive market structure diagrams, risk systems, and lifetime live guidance.<br><br><strong>2. Strategy Package (R700 Course)</strong>: tailored blueprints and entry schemas for traders with standard experience.<br><br>You can click on the 'Start Mentorship' buttons above to message our support directly on WhatsApp (+27 61 487 1133)!";
+        }
+
+        // 2. Risk Qs
+        if (qUpper.includes("RISK") || qUpper.includes("ALLOCAT") || qUpper.includes("MANAGE") || qUpper.includes("STOP")) {
+          return "Rule-based allocation is our ultimate value! We teach students to scale risk strictly below 1-2% of their compound equity balance per single sequence. This deflationary approach preserves capital during flat trading sessions.";
+        }
+
+        // 3. WhatsApp Group or Contact details
+        if (qUpper.includes("WHATSAPP") || qUpper.includes("GROUP") || qUpper.includes("CONTACT") || qUpper.includes("LINK") || qUpper.includes("COMMUNITY")) {
+          return "You can connect with us directly!<br>- Join our Free Group: <a href='https://chat.whatsapp.com/BcU6iDHB2eD2ZiSTBkZfPS?mode=gi_t' target='_blank'>WhatsApp Free Link</a><br>- Message support at +27 61 487 1133.<br>- Email: materialmamogafx@gmail.com";
+        }
+
+        // 4. Non Forex filter check
+        const tradingKeywordList = ["FOREX", "TRADE", "MARKET", "PIP", "BUY", "SELL", "CHART", "BLOCK", "CANDLE", "REWARD", "LOSS", "CURRENCY", "GBP", "USD", "EUR", "STRATEGY", "PSYCHOLOGY", "DISCIPLINE", "consistent", "MAMOGA"];
+        const matchesTrading = tradingKeywordList.some(kw => qUpper.includes(kw));
+
+        if (!matchesTrading) {
+          return "I am Skaymo, the specialized AI trading advisor for Mamoga Traders. I only answer forex and trading-related topics to keep our focus locked on market mastery. Feel free to ask me about risk management, market structure, or our premium mentorship packages!";
+        }
+
+        // 5. Default forex fallback response
+        return "Discipline, patience, and strict risk metrics are the pillars of stable speculative performance. High probability trades are found through aligning Imbalance ranges and Key Liquidity levels. Let me know if you would like me to break down our R1500 Beginner Mentorship or explain the custom R700 strategy pack!";
+      }
+    </script>
+  </body>
+</html>

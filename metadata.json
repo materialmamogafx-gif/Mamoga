@@ -1,0 +1,6 @@
+{
+  "name": "Mamoga Traders",
+  "description": "Premium forex education, mentorship program, and community website for Mamoga Traders, featuring Skaymo, an advanced forex AI chatbot.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
